@@ -45,7 +45,8 @@
   p {
     margin: 1em auto;
     color: #000;
-    width: 20%;
+    width: 400px;
+    text-align: justify;
   }
 
   figcaption {

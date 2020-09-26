@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: rgba(255, 62, 0, 1);
   }
 
   div {
