@@ -1,7 +1,3 @@
-<script>
-  import { WSASYSCALLFAILURE } from "constants";
-</script>
-
 <style>
   h1 {
     margin: 20px 0 0 0;
