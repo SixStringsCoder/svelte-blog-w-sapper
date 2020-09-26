@@ -8,6 +8,7 @@
     font-weight: 300;
     padding: 0 1em;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     background-color: rgba(255, 62, 0, 1);
@@ -19,9 +20,9 @@
   }
 
   h1 {
-    font-size: 2.8em;
+    font-size: 1.8em;
     font-weight: 700;
-    margin: 0;
+    margin: 0.3em 0 0;
     color: rgb(255, 254, 254);
   }
 
@@ -67,17 +68,38 @@
 
   a {
     text-decoration: none;
-    padding: 0.7em;
+    padding: 0.4em 0.7em;
     display: block;
+  }
+
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    nav {
+      flex-direction: row;
+    }
+
+    h1 {
+      margin: 0.3rem 0 0.6rem;
+    }
+  }
+
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+  }
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
   }
 </style>
 
 <nav>
-  <a aria-current={segment === undefined ? 'page' : undefined} href=".">
-    <div>
-      <h1><code>&#123;6&#125;</code> SixStringsCoder</h1>
-    </div>
-  </a>
+  <div id="logo-cont">
+    <a aria-current={segment === undefined ? 'page' : undefined} href=".">
+      <div>
+        <h1><code>&#123;6&#125;</code> SixStringsCoder</h1>
+      </div>
+    </a>
+  </div>
   <ul>
     <li>
       <a

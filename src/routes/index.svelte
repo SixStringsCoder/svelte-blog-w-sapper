@@ -13,13 +13,14 @@
   }
 
   h1 {
-    font-size: 2.8em;
+    font-size: 1.7em;
     font-weight: 700;
-    margin: 0;
+    margin: 0.3rem 0 0;
     color: rgba(255, 62, 0, 1);
   }
 
   h2 {
+    font-size: 1.4em;
     margin-bottom: 1rem;
   }
 
@@ -29,7 +30,7 @@
 
   img {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     margin: 0 0 1em 0;
     border-radius: 3%;
   }
@@ -43,19 +44,30 @@
   }
 
   p {
-    margin: 1em auto;
+    /* margin: 1em auto; */
+    width: 70%;
+    padding: 0 1rem;
     color: #000;
-    width: 400px;
     text-align: justify;
-  }
-
-  figcaption {
-    color: rgba(255, 62, 0, 1);
   }
 
   @media (min-width: 480px) {
     h1 {
       font-size: 4em;
+    }
+  }
+
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    p {
+      width: 40%;
+    }
+  }
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    p {
+      width: 30%;
     }
   }
 </style>
