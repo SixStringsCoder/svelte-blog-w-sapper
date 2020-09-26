@@ -1,3 +1,7 @@
+<script>
+  import { WSASYSCALLFAILURE } from "constants";
+</script>
+
 <style>
   h1 {
     margin: 20px 0 0 0;
@@ -25,9 +29,10 @@
   that is better and faster and the new norm among professional programmers.
 </p>
 <p>
-  With the arrival of Svelte, we yet again embark on this journey. But some how
+  With the arrival of Svelte, we yet again embark on this journey. But somehow
   it feels different. It feels lighter like when you move from one house to
   another and you get rid of all those books, clothes, and appliances you don't
-  use anymore. It feels more creative like when you discovered how a
-  pencil-to-paper was a quicker and more sufficient way to get your ideas down.
+  use anymore. I'm more creative because Svelte doesn't get in my way. It's
+  cleaner, too, minus all the boilerplate of React and spaghetti-nature of
+  vanilla JS syntax.
 </p>
