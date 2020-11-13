@@ -1,3 +1,7 @@
+<script>
+  export let segment;
+</script>
+
 <style>
   h1,
   figure {
@@ -51,6 +55,17 @@
     text-align: justify;
   }
 
+  #exercise-list {
+    text-align: left;
+  }
+
+  ul {
+    margin: 0 0 0 -30px;
+    list-style: none;
+    font-size: 1.3rem;
+  }
+
+
   @media (min-width: 480px) {
     h1 {
       font-size: 4em;
@@ -77,7 +92,7 @@
 </svelte:head>
 
 <div id="headings">
-  <h1>How-To Svelte</h1>
+  <h1>How-To-Svelte</h1>
   <h2 title="https://svelte.dev/">The Blog for Practicing Svelte</h2>
 </div>
 
@@ -97,4 +112,13 @@
     front-end libraries. This blog will focus on learning Svelte by creating the
     same useful, ubiquitous <code>code snippets</code>.
   </p>
+</section>
+
+<section id="exercise-list">
+  <h1>Exercises</h1>
+  <ul>
+    <li><a
+      aria-current={segment === 'slideshow_gallery' ? 'page' : undefined}
+      href="slideshow_gallery">Slideshow Gallery</a></li>
+  </ul>
 </section>

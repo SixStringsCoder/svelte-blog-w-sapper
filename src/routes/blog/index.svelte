@@ -29,7 +29,7 @@
 </style>
 
 <svelte:head>
-  <title>Blog</title>
+  <title>How-to-Svelte Blog</title>
 </svelte:head>
 
 <h1>Recent posts</h1>
