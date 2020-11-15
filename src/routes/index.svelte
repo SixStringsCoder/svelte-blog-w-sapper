@@ -120,5 +120,8 @@
     <li><a
       aria-current={segment === 'slideshow_gallery' ? 'page' : undefined}
       href="slideshow_gallery">Slideshow Gallery</a></li>
+    <li><a
+      aria-current={segment === 'lightbox' ? 'page' : undefined}
+      href="lightbox">Lightbox</a></li>
   </ul>
 </section>
