@@ -1,4 +1,5 @@
 <script>
+	import VideoRepl from '../../components/VideoRepl.svelte';
 	import { images } from './imageData.js';
 	import Slide from './Slide.svelte';
 	import Thumbnail from './Thumbnail.svelte';
@@ -58,6 +59,7 @@ main {
 	align-self: flex-end;
 }	
 
+
   /* Extra large devices (large laptops and desktops, 1200px and up) */
   @media only screen and (min-width: 1200px) {
     main {
@@ -66,6 +68,7 @@ main {
     }
   }
 </style>
+
 
 <main>
 	
@@ -101,6 +104,8 @@ main {
 
 </main>
 
-<footer>
-	<a href="https://svelte.dev/repl/7c0339d9aeb64b8c9b4bf402c71d791e?version=3.29.7" target="_blank">View Svelte Code</a>
-</footer>
+
+<VideoRepl iframeURL="https://www.youtube.com/embed/YaaZ0SUwWyU"
+ 					 title="Slideshow Svelte Tutorial"
+ 					 replURL="https://svelte.dev/repl/7c0339d9aeb64b8c9b4bf402c71d791e?version=3.29.7" />
+
