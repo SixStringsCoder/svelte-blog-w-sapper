@@ -123,5 +123,8 @@
     <li><a
       aria-current={segment === 'lightbox' ? 'page' : undefined}
       href="lightbox">Lightbox</a></li>
+    <li><a
+      aria-current={segment === 'scroll_effects' ? 'page' : undefined}
+      href="scroll_effects">Scroll Effects</a></li>
   </ul>
 </section>
