@@ -126,5 +126,8 @@
     <li><a
       aria-current={segment === 'scroll_effects' ? 'page' : undefined}
       href="scroll_effects">Scroll Effects</a></li>
+    <li><a
+      aria-current={segment === 'typewriter' ? 'page' : undefined}
+      href="typewriter">Typewriter Effect</a></li>
   </ul>
 </section>
