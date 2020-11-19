@@ -129,5 +129,8 @@
     <li><a
       aria-current={segment === 'typewriter' ? 'page' : undefined}
       href="typewriter">Typewriter Effect</a></li>
+    <li><a
+      aria-current={segment === 'progress_bar' ? 'page' : undefined}
+      href="progress_bar">Progress Bar</a></li>
   </ul>
 </section>
