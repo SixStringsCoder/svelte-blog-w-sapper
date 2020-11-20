@@ -65,6 +65,10 @@
     font-size: 1.3rem;
   }
 
+  li {
+    line-height: 170%;
+  }
+
 
   @media (min-width: 480px) {
     h1 {
@@ -132,5 +136,8 @@
     <li><a
       aria-current={segment === 'progress_bar' ? 'page' : undefined}
       href="progress_bar">Progress Bar</a></li>
+    <li><a
+      aria-current={segment === 'tree_view' ? 'page' : undefined}
+      href="tree_view">Tree View</a></li>
   </ul>
 </section>
