@@ -139,5 +139,8 @@
     <li><a
       aria-current={segment === 'tree_view' ? 'page' : undefined}
       href="tree_view">Tree View</a></li>
+    <li><a
+      aria-current={segment === 'accordion' ? 'page' : undefined}
+      href="accordion">Accordion</a></li>
   </ul>
 </section>
