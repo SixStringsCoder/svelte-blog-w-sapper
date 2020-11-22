@@ -142,5 +142,8 @@
     <li><a
       aria-current={segment === 'accordion' ? 'page' : undefined}
       href="accordion">Accordion</a></li>
+    <li><a
+      aria-current={segment === 'autocomplete' ? 'page' : undefined}
+      href="autocomplete">Autocomplete</a></li>
   </ul>
 </section>

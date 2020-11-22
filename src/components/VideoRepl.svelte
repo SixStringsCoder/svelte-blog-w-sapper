@@ -20,6 +20,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10%;
     padding: 20px 0;
     border-top: 1px solid rgb(165, 161, 161);
   }
