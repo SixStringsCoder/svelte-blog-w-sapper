@@ -145,5 +145,8 @@
     <li><a
       aria-current={segment === 'autocomplete' ? 'page' : undefined}
       href="autocomplete">Autocomplete</a></li>
+    <li><a
+      aria-current={segment === 'audioplayer' ? 'page' : undefined}
+      href="audioplayer">Audio Player</a></li>
   </ul>
 </section>
