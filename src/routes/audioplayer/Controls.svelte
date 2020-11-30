@@ -36,6 +36,7 @@
 	button {
 		width: 37px;
 		border: none;
+		outline: none;
 		font-size: 2.3rem;
 		padding: 0;
 		cursor: pointer;

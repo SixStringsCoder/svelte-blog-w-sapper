@@ -2,14 +2,19 @@
 	import { audioData } from './audioData.js';
 	import { onMount } from 'svelte';
 	
+	// Components
+	import TrackHeading from './TrackHeading.svelte';
 	import ProgressBarTime from './ProgressBarTime.svelte';
 	import Controls from './Controls.svelte';
 	import VolumeSlider from './VolumeSlider.svelte';
+	import PlayList from './PlayList.svelte';
 	
-	// Audio URL from audioData
-	const fileURL = audioData[1].url
-	const audio = new Audio(fileURL);
-
+	// AudioData for track
+	let trackIndex = 1;	
+	$: trackTitle = audioData[trackIndex].name;
+	let audio = new Audio(audioData[trackIndex].url);
+	//audio.src = audioData[trackIndex].url;
+	$: console.log(trackIndex, trackTitle, audioData[trackIndex].url, audio);
 	
 	// Audio Time
 	let totalTrackTime = audio.duration; // in seconds 
@@ -29,11 +34,11 @@
 		if (audio.ended) {
 			clearInterval(trackTimer);		
 		} else {
-			trackTimer = setInterval(handleAudioTime, 100);
+			trackTimer = setInterval(updateTime, 100);
 		}
 	}
 	
-	function handleAudioTime() {
+	function updateTime() {
 		progress = audio.currentTime * (100 / totalTrackTime);
 		
 		let currHrs = Math.floor((audio.currentTime / 60) / 60);
@@ -55,9 +60,9 @@
 		if (audio.ended) isPlaying = false;
 	}
 	
-	function displayTime() {
+	function loadTrackTime() {
+		audio = new Audio(audioData[trackIndex].url);
 		audio.onloadedmetadata = () => totalTrackTime = audio.duration;
-		// audio.ontimeupdate = () => audio.currentTime * (100 / totalTrackTime);
 		toggleTimeRunning();
 	}
 
@@ -72,14 +77,19 @@
 	const rewind = () => audio.currentTime -= 20;
 	const forward = () => audio.currentTime += 20;
 
+	// Playlist Tracks
+	const handleTrack = (e) => {
+		trackIndex = Number(e.target.dataset.trackId);
+		loadTrackTime();
+	}
 	
-	onMount(() => displayTime());
+	onMount(() => loadTrackTime());
 </script>
 
 
 <main>
-	<section id="player-cont">
-		
+	<section id="player-cont">	
+		<TrackHeading {trackTitle} />
 		<ProgressBarTime {totalTrackTime} 
 										 {totalTimeDisplay} 
 										 {currTimeDisplay} 
@@ -91,9 +101,10 @@
 							{isPlaying} />
 		
 		<VolumeSlider bind:vol 
-									on:input={adjustVol} />
-		
+									on:input={adjustVol} />	
 	</section>
+	
+	<PlayList on:click={handleTrack} />
 </main>	
 
 
@@ -102,18 +113,20 @@
 		width: 100vw;
 		height: 100vh;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+/* 		justify-content: center; */
+		padding: 20px 0 0 0;
 		background-color: #ddd;
 	}
 
 	#player-cont {
 		width: 250px;
-		height: 150px;
+		height: 165px;
 		padding: .7rem 1.5rem 0;
 		box-shadow: 0 0 5px black;
 		background: #222;
 		color: #bbb;
-		border-radius: 5px;
+		border-radius: 5px 5px 0 0;
 	}
 </style>

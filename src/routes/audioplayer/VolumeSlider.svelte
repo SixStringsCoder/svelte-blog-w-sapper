@@ -21,7 +21,7 @@
 <style>
 	.slidecontainer {
 		width: 100%; /* Width of the outside container */
-		margin: 1rem 0 0 0;
+		margin: 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
