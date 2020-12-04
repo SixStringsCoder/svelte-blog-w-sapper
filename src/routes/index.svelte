@@ -148,5 +148,8 @@
     <li><a
       aria-current={segment === 'audioplayer' ? 'page' : undefined}
       href="audioplayer">Audio Player</a></li>
+    <li><a
+      aria-current={segment === 'portfolio_gallery' ? 'page' : undefined}
+      href="portfolio_gallery">Portfolio Gallery with Filtering</a></li>
   </ul>
 </section>
