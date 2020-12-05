@@ -151,5 +151,8 @@
     <li><a
       aria-current={segment === 'portfolio_gallery' ? 'page' : undefined}
       href="portfolio_gallery">Portfolio Gallery with Filtering</a></li>
+    <li><a
+      aria-current={segment === 'flashcards' ? 'page' : undefined}
+      href="flashcards">Flashcards with Flip Effect</a></li>
   </ul>
 </section>
