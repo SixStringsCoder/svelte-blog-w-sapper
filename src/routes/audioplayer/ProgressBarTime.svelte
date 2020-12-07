@@ -1,9 +1,19 @@
 <script>
-	export let totalTrackTime;
-	export let totalTimeDisplay;
 	export let currTimeDisplay;
+	export let totalTimeDisplay;
 	export let progress;
 </script>
+
+
+<div id="time">
+	<span id="progress-time">{currTimeDisplay}</span>
+	<span id="track-duration">{totalTimeDisplay}</span>
+</div>
+
+<div id="progress-bar-cont">
+	<span id="bar" style="width: {progress}%"></span>
+</div>
+
 
 <style>
 	#time {
@@ -28,13 +38,3 @@
 		background-color: goldenrod;
 	}
 </style>
-
-
-<div id="time">
-	<span id="progress-time">{!currTimeDisplay ? "0:00" : `${currTimeDisplay}`}</span>
-	<span id="track-duration">{!totalTrackTime ? "0:00" : `${totalTimeDisplay}`}</span>  
-</div>
-
-<div id="progress-bar-cont">
-	<span id="bar" style="width: {progress}%"></span>
-</div>

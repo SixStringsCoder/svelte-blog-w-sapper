@@ -2,9 +2,6 @@
 	import { createEventDispatcher } from 'svelte';
 	
 	let dispatch = createEventDispatcher();
-
-  export let isPlaying;
-	// $: console.log(`isPlaying: ${isPlaying}`)
 	
 	const icons = {
 		play: "https://freesvg.org/img/media-playback-start.png",
@@ -12,20 +9,24 @@
 		rewind: "https://freesvg.org/img/media-skip-backward.png",
 		fwd: "https://freesvg.org/img/media-skip-forward.png"
 	}
+	
+  export let isPlaying;
+	
 </script>
 
-<div id="btn-cont">
-	<button id="rewind" on:mousedown={() => dispatch('rewind')}>
-		<img src={icons.rewind} alt="rewind"/> 
-	</button>
-	<button id="play" on:click={() => dispatch('playOrPause')}>
-		<img src={isPlaying ? icons.pause : icons.play} alt="play and pause icons"/> 
-	</button>
 
-	<button id="forward" on:mousedown={() => dispatch('forward')}>
-		<img src={icons.fwd} alt="rewind"/> 
+<div id="btn-cont">
+	<button id="rewind" on:click={() => dispatch('rewind')}>
+		<img src={icons.rewind} alt="rewind"/>
 	</button>
-</div>  
+	<button id="play" on:click={() => dispatch('playPause')}>
+		<img src={isPlaying ? icons.pause : icons.play} 
+				 alt="play"/>
+	</button>
+	<button id="forward" on:click={() => dispatch('forward')}>
+		<img src={icons.fwd} alt="forward"/>
+	</button>
+</div>
 
 <style>
 	#btn-cont {
@@ -36,7 +37,6 @@
 	button {
 		width: 37px;
 		border: none;
-		outline: none;
 		font-size: 2.3rem;
 		padding: 0;
 		cursor: pointer;

@@ -1,5 +1,5 @@
 <script>
-	export let trackTitle;
+  export let trackTitle;
 </script>
 
 <div>

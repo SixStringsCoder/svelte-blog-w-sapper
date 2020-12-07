@@ -3,19 +3,19 @@
 	
 	let listIsShowing = false;
 	
-	const showPlayList = () => listIsShowing = !listIsShowing;
+	const showPlayList = () => listIsShowing = !listIsShowing
 </script>
 
 
 <section id="playlist-cont">
-	<button class="accordion" 
+	<button class="accordion"
 					class:active={listIsShowing}
 					on:click={showPlayList}>&#9776; Playlist</button>
-	
+
 	<ul class:show-list={listIsShowing}>
 		{#each audioData as {name, url}, i}
-			<li data-track-id={i} 
-					on:click>
+		<li data-track-id={i}
+				on:click>
 			{name}</li>
 		{/each}
 	</ul>
@@ -23,7 +23,7 @@
 
 
 <style>
-	section {
+	section#playlist-cont {
 		width: 298px;	
 		box-shadow: 0 0 5px #222;
 		border-radius: 0 0 5px 5px;
@@ -31,8 +31,7 @@
 	}
 	
 	/* Style the buttons that are used to open and close the accordion panel */
-	button.accordion {
-		width: 250px;		
+	button.accordion {		
 		background: #222;
 		color: #bbb;
 		margin: 0;

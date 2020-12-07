@@ -1,5 +1,5 @@
 <script>
-	export let vol;
+  export let vol;
 </script>
 
 <div class="slidecontainer">
@@ -13,7 +13,8 @@
 				 step="1" 
 				 name="volume"
 				 bind:value={vol}
-				 on:input>
+				 on:input
+				 >
 
 	<label for="volume-slider">{vol}</label>
 </div>
@@ -70,8 +71,4 @@
 		background: #4CAF50; /* Green background */
 		cursor: pointer; /* Cursor on hover */
 	}
-	
-	/*.slider::-webkit-slider-thumb:hover {
-			background: #555;
-	} */
 </style>
