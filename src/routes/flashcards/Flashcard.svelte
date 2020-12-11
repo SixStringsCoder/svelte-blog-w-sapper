@@ -1,37 +1,22 @@
 <script>
-  export let clue;
+	export let clue;
 	export let answer;
+	export let showCardBack;
 </script>
+
 
 <div class="flip-box-front">
 	<div id="image-cont">
-			<img src={clue} alt={answer} />
+		<img src={clue} alt={answer} />
 	</div>
 </div>
 
-<div class="flip-box-back">
+<div class="flip-box-back" class:conceal-answer={showCardBack}>
 	<h2>{answer}</h2>
 </div>
 
-<style>
-	/* Style the front side */
-	.flip-box-front {
-		background-color: #ddd;
-		color: black;
-		display: flex;
-		justify-content: center;
-	}
 
-	/* Style the back side */
-	.flip-box-back {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: green;
-		color: white;
-		transform: rotateY(180deg);
-	}
-	
+<style>
 	/* Position the front and back side */
 	.flip-box-front, .flip-box-back {
 		position: absolute;
@@ -41,9 +26,37 @@
 		backface-visibility: hidden;
 		box-shadow: -1px 1px 3px black;
 	}
+
+	/* Style the front side */
+	.flip-box-front {
+		background-color: #ddd;
+		color: black;
+		display: flex;
+		justify-content: center;
+	}
+	
+	@keyframes revealTextSlowly {
+		to { color: #fff }
+	}
+	
+	.conceal-answer {
+		animation: revealTextSlowly .3s forwards;
+	}
+	
+	/* Style the back side */
+	.flip-box-back {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #61592F;
+		color: #61592F;
+/* 		color: white; */
+		font-size: 1.3rem;
+		transform: rotateY(180deg);
+	}
 	
 	#image-cont {
-		background-color: #f9e685;
+		background-color: hsl(50, 65%, 75%);
 		max-width: 100%;
 		display: flex;
 		justify-content: center;
