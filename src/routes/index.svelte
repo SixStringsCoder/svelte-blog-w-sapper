@@ -155,6 +155,9 @@
       aria-current={segment === 'flashcards' ? 'page' : undefined}
       href="flashcards">Flashcards with Flip Effect</a></li>
     <li><a
+      aria-current={segment === 'biz_card_flip' ? 'page' : undefined}
+      href="biz_card_flip">Biz Cards with Flip Effect</a></li>
+    <li><a
       aria-current={segment === 'password_maker' ? 'page' : undefined}
       href="password_maker">Password Maker</a></li>
   </ul>
