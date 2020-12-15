@@ -160,5 +160,8 @@
     <li><a
       aria-current={segment === 'password_maker' ? 'page' : undefined}
       href="password_maker">Password Maker</a></li>
+    <li><a
+      aria-current={segment === 'off_canvas_menu_toggle' ? 'page' : undefined}
+      href="off_canvas_menu_toggle">Off-Canvas Menu toggle</a></li>
   </ul>
 </section>
