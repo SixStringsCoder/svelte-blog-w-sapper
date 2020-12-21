@@ -163,5 +163,8 @@
     <li><a
       aria-current={segment === 'off_canvas_menu_toggle' ? 'page' : undefined}
       href="off_canvas_menu_toggle">Off-Canvas Menu toggle</a></li>
+    <li><a
+      aria-current={segment === 'quote_rotator' ? 'page' : undefined}
+      href="quote_rotator">Quote rotator</a></li>
   </ul>
 </section>
