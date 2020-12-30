@@ -166,5 +166,8 @@
     <li><a
       aria-current={segment === 'quote_rotator' ? 'page' : undefined}
       href="quote_rotator">Quote rotator</a></li>
+    <li><a
+      aria-current={segment === 'emoji_keyboard' ? 'page' : undefined}
+      href="emoji_keyboard">Emoji Menu Keyboard</a></li>
   </ul>
 </section>
