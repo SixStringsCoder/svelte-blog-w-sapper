@@ -10,7 +10,9 @@
 		{ type: "faces2", min:129296, max: 129327},
 		{ type: "body", min:128066, max: 128080},
 		{ type: "animals", min:129408, max: 129442},
-		{ type: "transport", min:128640, max: 128676}
+		{ type: "transport", min:128640, max: 128676},
+		{ type: "misc", min:129494, max: 129535},
+			
 	];
 	
 	let selectedSet = 0;
@@ -34,7 +36,8 @@
 	}
 
 	// Header on emoji keyboard to select different emoji sets
-	let setIcons = ["=", ">", "=", ">", "="]
+// 	let setIcons = ["😀", "🤡", "👊", "🦉", "🚘", "🧠"]
+	let setIcons = [128512, 129313, 128074, 129417, 128664, 129504]
 	
 	// Emoji icon to open modal of emojis
 	let emojiIcon = String.fromCodePoint(128571);
@@ -58,8 +61,11 @@
 	}
 	
 	// Testing area
-	// console.log("=".codePointAt(0))
-	// console.log(String.fromCodePoint(128520))
+	// console.log("😻".charCodeAt(0))
+	// console.log(String.fromCharCode(128571))
+	console.log("🧠".codePointAt(0))
+	console.log(String.fromCodePoint(127757))
+	
 </script>
 
 <section>
@@ -86,7 +92,7 @@
 		<div id="emoji-cont" transition:fly={{ y: -30 }}>
 			<header>
 				{#each setIcons as icon, i}
-					<div data-id={i} on:click={chooseEmojiSet}>{icon}</div>		
+					<div data-id={i} on:click={chooseEmojiSet}>{String.fromCodePoint(icon)}</div>		
 				{/each}
 					<div id="closer-icon" on:click={() => modalOpen = false}>X</div>
 			</header>
@@ -119,7 +125,7 @@
 		width: 100%;
 		padding: 15px;
 		margin: 5px 0 22px 0;
-
+		font-size: 1.5rem;
 		border: none;
 		background: #ddd;
 		resize: none;
@@ -181,6 +187,7 @@
 	#emoji-cont header {
 		width: 98%;
 		display: flex;
+		align-items: center;
 		justify-content: space-around;
 		border: 1px solid gray;
 	}
@@ -193,7 +200,7 @@
 		font-size: 1.5rem;
 		padding: .3rem;
 		border: 1px solid gray;
-		background: #ddd;
+		background: #eee;
 		cursor: pointer;
 	}
 	
@@ -206,5 +213,4 @@
 		font-weight: bold;
 		text-align: right;
 	}
-
 </style>
