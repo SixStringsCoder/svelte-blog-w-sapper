@@ -1,24 +1,20 @@
 <script>
-	// ref: https://thekevinscott.com/emojis-in-javascript/
-	// ref: https://www.w3schools.com/charsets/ref_emoji_smileys.asp
-	// https://www.w3schools.com/howto/howto_js_popup_chat.asp
-	
 	import { fly } from 'svelte/transition';
 	
 	let emojiSets = [
-		{ type: "faces", min:128512, max: 128580 },
-		{ type: "faces2", min:129296, max: 129327},
-		{ type: "body", min:128066, max: 128080},
-		{ type: "animals", min:129408, max: 129442},
-		{ type: "transport", min:128640, max: 128676},
-		{ type: "misc", min:129494, max: 129535},
+		{ type: "faces", minVal:128512, maxVal: 128580 },
+		{ type: "faces2", minVal:129296, maxVal: 129327},
+		{ type: "body", minVal:128066, maxVal: 128080},
+		{ type: "animals", minVal:129408, maxVal: 129442},
+		{ type: "transport", minVal:128640, maxVal: 128676},
+		{ type: "misc", minVal:129494, maxVal: 129535},
 			
 	];
 	
 	let selectedSet = 0;
 	// $: console.log(selectedSet)
-	$: min = emojiSets[selectedSet].min;
-	$: max = emojiSets[selectedSet].max;
+	$: min = emojiSets[selectedSet].minVal;
+	$: max = emojiSets[selectedSet].maxVal;
 	
 	// storage of emojis to make emoji keyboard
 	let emojis = [];
@@ -36,7 +32,6 @@
 	}
 
 	// Header on emoji keyboard to select different emoji sets
-// 	let setIcons = ["😀", "🤡", "👊", "🦉", "🚘", "🧠"]
 	let setIcons = [128512, 129313, 128074, 129417, 128664, 129504]
 	
 	// Emoji icon to open modal of emojis
@@ -47,26 +42,26 @@
 	
 	// CHAT MESSAGE
 	let textBox; // for bind:this
-	
 	let message = "";
-	// $: console.log(message);
 	
 	const addEmoji = (e) => {
 		message += e.target.textContent
 	}
 	
 	const submitMsg = () => {
-		textBox.value = "";
 		console.log(`The message: (${message}) has been sent.`);	
+		textBox.value = "";
+		message = "";
+		modalOpen = false; // close emoji menu
 	}
 	
-	// Testing area
+	// Emoji Testing Area
 	// console.log("😻".charCodeAt(0))
 	// console.log(String.fromCharCode(128571))
 	console.log("🧠".codePointAt(0))
 	console.log(String.fromCodePoint(127757))
-	
 </script>
+
 
 <section>
 	<div class="chat-popup" id="myForm">
