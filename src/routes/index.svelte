@@ -169,5 +169,8 @@
     <li><a
       aria-current={segment === 'emoji_keyboard' ? 'page' : undefined}
       href="emoji_keyboard">Emoji Menu Keyboard</a></li>
+    <li><a
+      aria-current={segment === 'playing_cards_blackjack' ? 'page' : undefined}
+      href="playing_cards_blackjack">Playing Cards: Blackjack</a></li>
   </ul>
 </section>
