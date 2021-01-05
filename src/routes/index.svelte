@@ -172,5 +172,8 @@
     <li><a
       aria-current={segment === 'playing_cards_blackjack' ? 'page' : undefined}
       href="playing_cards_blackjack">Playing Cards: Blackjack</a></li>
+    <li><a
+      aria-current={segment === 'video_float_window' ? 'page' : undefined}
+      href="video_float_window">Video Float on Scroll</a></li>
   </ul>
 </section>
