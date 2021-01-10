@@ -175,5 +175,8 @@
     <li><a
       aria-current={segment === 'video_float_window' ? 'page' : undefined}
       href="video_float_window">Video Float on Scroll</a></li>
+    <li><a
+      aria-current={segment === 'sort_table' ? 'page' : undefined}
+      href="sort_table">Sort Table by Column</a></li>
   </ul>
 </section>
