@@ -1,12 +1,18 @@
 <script>
 	import { onMount } from 'svelte';
+	import { fly } from 'svelte/transition';
+	import { flip } from 'svelte/animate';
+	import { quintOut } from 'svelte/easing';
 	
 	import { cardsData } from './cardData.js';
 	import Card from './Card.svelte';
 	
 	let deckOfCards = [];
-	$: console.log(deckOfCards)
-	let dealtCards = []; // click a card, pop and push it to this array; render this array above the deck of cards
+	let dealtCards = []; 
+	$: console.log(deckOfCards, dealtCards)
+	let tablePosX = 10;
+	
+	let handTotal = 0;
 	
 	// Using Fisher-Yates method
 	const shuffleDeck = (arrOfCards) => {
@@ -21,12 +27,22 @@
 	
 	const makeDeck = () => {
 		for (let suit of cardsData) {
-			for (let value of suit.values) {
-				let card = {shape: suit.shape, color: suit.color, value }
+			for (let i = 0; i < suit.labels.length; i++) {
+				let card = {
+					shape: suit.shape, 
+					color: suit.color, 
+					label: suit.labels[i],
+					value: suit.values[i]
+				}
 				deckOfCards = [...deckOfCards, card]
 			}
 		}
 		shuffleDeck(deckOfCards)
+	}
+	
+	const dealCard = () => {
+		let card = deckOfCards.pop();
+		dealtCards = [...dealtCards, card];
 	}
 	
 		
@@ -37,35 +53,67 @@
 
 
 <main id="card-table">
+	
 	<section id="dealt-cards-cont">
-		
+		{#each dealtCards as dealtCard, i (dealtCard)}
+			<div class="card-dealt" 
+					 style="left: {tablePosX+80 * i}px"
+					 transition:fly={{y: 100, duration: 250, easing: quintOut}}>
+				<Card suit={dealtCard.shape}
+								cardColor={dealtCard.color}
+								cardValue={dealtCard.value}
+								label={dealtCard.label}
+								showingCard="true"
+								/> 
+			</div>	
+		{/each}	
 	</section>
-	{#each deckOfCards as card}
+	
+	<section id="deck-of-cards-cont">
+		{#each deckOfCards as card}
 			<Card suit={card.shape}
 						cardColor={card.color}
-						name={card.value} /> 
-	{/each}	
+						cardValue={card.value}
+						label={card.label}
+						on:click={dealCard} /> 
+		{/each}	
+	</section>	
+	
 </main>
 
 
 <style>
-/* 	#card-table {
+	main#card-table {
 		width: 100vw;
 		height: 100vh;
-		overflow: scroll;
+/* 		overflow: scroll; */
+		display: flex;
+		flex-direction: column;
+		background-color: #256d40;
+		padding: 10px;
+	}
+	
+	section#dealt-cards-cont {
+/* 		border: 1px solid black; */
+		width: 100%;
+		height: 320px;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		align-items: flex-start;
-		background-color: #256d40;
-		padding: 20px;
-	} */
-	
-	#card-table {
-		width: 100vw;
-		height: 100vh;
+		padding: 5px;
 		overflow: scroll;
-		background-color: #256d40;
+	}
+	
+	div.card-dealt {
+		margin: 0 10px;
+		position: absolute;
+	}
+	
+	section#deck-of-cards-cont {
+/* 		border: 1px solid black; */
+		width: 100%;
+		height: 320px;
+		padding: 5px;
 	}
 </style>
 

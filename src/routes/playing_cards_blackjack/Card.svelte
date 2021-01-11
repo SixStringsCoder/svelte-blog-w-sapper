@@ -1,27 +1,30 @@
 <script>
-	export let name;
+	export let label;
 	export let suit;
 	export let cardColor;
+	export let cardValue;
 	
-	let showingCard = false;
+	export let showingCard;
 </script>
 
 
-<div class="flip-card"	
-		 class:deal-card={showingCard}
-		 on:click={() => showingCard = !showingCard}>
-	<div class="outer-container" class:flip-over={showingCard}>
+<div class="flip-card" 
+		 class:face-down-in-deck={!showingCard}
+		 data-value={cardValue}
+		 on:click>
+	<div class="outer-container" 
+			 class:flip-over={showingCard}>
 
-		<section class="card front" id={name-suit}>
+		<section class="card front" id={label-suit}>
 			<div id="card-left-side" style="color: {cardColor}">
-				<span class="value">{name}</span>
+				<span class="value">{label}</span>
 				<span class="suit">{@html suit}</span>    
 			</div>
 			<div id="card-center" style="color: {cardColor}">
 				<span class="suit">{@html suit}</span>
 			</div>
 			<div id="card-right-side" style="color: {cardColor}">
-				<span class="value">{name}</span>
+				<span class="value">{label}</span>
 				<span class="suit">{@html suit}</span> 
 			</div>
 		</section>
@@ -42,12 +45,6 @@
 	* { font-family: 'Fredericka the Great', cursive;}
 	
 	.flip-card {
-		position: absolute;
-		left: 0;
-		right: 0;
-		margin-left: auto;
-		margin-right: auto;
-		bottom: 20px;
 		background-color: transparent;
 		width: 240px;
 		height: 320px;
@@ -56,9 +53,18 @@
 		transition: all .5s;
 	}
 	
-	.deal-card {
-		transform: translate(-110%, -110%);
+	.face-down-in-deck {
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
+/* 		bottom: 20px; */
 	}
+	
+/* 	.deal-card {
+		transform: translate(-110%, -110%);
+	} */
 	
 	.outer-container {
 		position: relative;
@@ -82,7 +88,7 @@
 		justify-content: space-between;
 		overflow: hidden;
 		background-color: rgba(255, 255, 255, 1);
-		margin: 5px;
+/* 		margin: 5px; */
 	}
 
 	.front {
