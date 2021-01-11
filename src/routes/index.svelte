@@ -178,5 +178,8 @@
     <li><a
       aria-current={segment === 'sort_table' ? 'page' : undefined}
       href="sort_table">Sort Table by Column</a></li>
+    <li><a
+      aria-current={segment === 'sign_up_form' ? 'page' : undefined}
+      href="sign_up_form">Sign Up Form - Modal</a></li>
   </ul>
 </section>
