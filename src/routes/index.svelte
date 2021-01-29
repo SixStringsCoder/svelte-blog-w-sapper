@@ -181,5 +181,8 @@
     <li><a
       aria-current={segment === 'sign_up_form' ? 'page' : undefined}
       href="sign_up_form">Sign Up Form - Modal</a></li>
+    <li><a
+      aria-current={segment === 'tabs_full_page' ? 'page' : undefined}
+      href="tabs_full_page">Full Page - Tabs</a></li>
   </ul>
 </section>
