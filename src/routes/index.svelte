@@ -184,5 +184,8 @@
     <li><a
       aria-current={segment === 'tabs_full_page' ? 'page' : undefined}
       href="tabs_full_page">Full Page - Tabs</a></li>
+    <li><a
+      aria-current={segment === 'chat_messages' ? 'page' : undefined}
+      href="chat_messages">Chat Messages</a></li>
   </ul>
 </section>
