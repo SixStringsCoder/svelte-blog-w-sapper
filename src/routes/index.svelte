@@ -187,5 +187,7 @@
     <li><a
       aria-current={segment === 'chat_messages' ? 'page' : undefined}
       href="chat_messages">Chat Messages</a></li>
+    <li><a
+      aria-current={segment === 'news_api' ? 'page' : undefined}
+      href="news_api">Hacker News API</a></li>
   </ul>
-</section>
