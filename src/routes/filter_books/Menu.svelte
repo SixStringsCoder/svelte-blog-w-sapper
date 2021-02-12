@@ -28,6 +28,7 @@
 	
 	select {
 		margin: 0;
+		padding: 8.5px;
 		font-size: 1.18rem;
 		border: 1px solid gray;
 		border-radius: 5px;

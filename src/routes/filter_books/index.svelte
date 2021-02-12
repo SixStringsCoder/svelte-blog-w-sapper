@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
-	import { bookData } from './bookData.js';	
 	
+	import { bookData } from './bookData.js';		
 	import Menu from './Menu.svelte';
 	import Search from './Search.svelte';
 	import Book from './Book.svelte';
@@ -16,8 +16,7 @@
 			}
 		}
 		languages = languages.sort();
-	}
-		
+	}	
 	onMount(() => getLanguages());
 	
 	
@@ -32,12 +31,14 @@
 		if (selectedLang === "all") {
 			return filteredBooks = [];
 		} else {
-			return filteredBooks = bookData.filter(book => book.title === selectedLang);
+			return filteredBooks = bookData.filter(book => book.language === selectedLang);
 		}
 	}	
 	
 	// For Search Input
 	let searchTerm = "";
+	// resets language menu if search input is used
+	$: if (searchTerm) selectedLang = ""; 
 	
 	const searchBooks = () => {	
 		return filteredBooks = bookData.filter(book => {
