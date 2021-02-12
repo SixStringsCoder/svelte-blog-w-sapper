@@ -190,4 +190,7 @@
     <li><a
       aria-current={segment === 'news_api' ? 'page' : undefined}
       href="news_api">Hacker News API</a></li>
+    <li><a
+      aria-current={segment === 'filter_books' ? 'page' : undefined}
+      href="filter_books">Filter Books with Menu and Search Input</a></li>
   </ul>
