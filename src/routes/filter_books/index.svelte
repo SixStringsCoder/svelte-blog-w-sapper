@@ -1,72 +1,87 @@
 <script>
 	import { onMount } from 'svelte';
 	
-	import { bookData } from './bookData.js';		
+	import { bookData } from './bookData.js';
+	import Book from './Book.svelte';
 	import Menu from './Menu.svelte';
 	import Search from './Search.svelte';
-	import Book from './Book.svelte';
+	import NoResults from './NoResults.svelte';
 	
 	let languages = []; // menu built from bookData
-	let selectedLang = ""; //  menu selection	
+	let selectedLang = ""; // menu selection	
 	
 	const getLanguages = () => {
-		for (let obj of bookData) {
-			if (!languages.includes(obj.language)) {
-				languages = [...languages, obj.language]
+		bookData.forEach(bookObj => {
+			if (!languages.includes(bookObj.language)) {
+				languages = [...languages, bookObj.language]
 			}
-		}
-		languages = languages.sort();
+		})
+		languages = languages.sort(); // alphabetize
 	}	
 	onMount(() => getLanguages());
 	
 	
 	// Query results
 	let filteredBooks = [];
+	$: if (selectedLang) getBooksByLang();
 	
 	// For Select Menu
-	$: if (selectedLang) getLangBooks();
-	$: console.log(filteredBooks, selectedLang);
-	
-	const getLangBooks = () => {
+	const getBooksByLang = () => {
+		searchTerm = ""; // reset search input
+		
 		if (selectedLang === "all") {
 			return filteredBooks = [];
-		} else {
-			return filteredBooks = bookData.filter(book => book.language === selectedLang);
 		}
-	}	
+		return filteredBooks = bookData.filter(book => book.language === selectedLang);
+	}
 	
 	// For Search Input
 	let searchTerm = "";
-	// resets language menu if search input is used
+	// reset menu if Search is used
 	$: if (searchTerm) selectedLang = ""; 
 	
-	const searchBooks = () => {	
+	const searchBooks = () => {
 		return filteredBooks = bookData.filter(book => {
-			let bookTitle = book.title.toLowerCase();
-			return bookTitle.includes(searchTerm.toLowerCase())
+			let bookTitleLower = book.title.toLowerCase();
+			return bookTitleLower.includes(searchTerm.toLowerCase());
 		});
 	}
 </script>
 
 
-<section id="search-section">
+<section id="query-section">
 	<Menu {languages} bind:selectedLang />
 	<Search bind:searchTerm on:input={searchBooks} />
-</section>	
+</section>
 
 <main id="bookshelf">
 	{#if searchTerm && filteredBooks.length === 0}
-		<h3>No results</h3>		
+			<NoResults />
 	{:else if filteredBooks.length > 0}
-		{#each filteredBooks as {title, image, language}}
-			<Book {title} {image} {language} />
-		{/each}	
+		{#each filteredBooks as {title, image, language, ebookBundle, pdfLink, appleLink, googleLink, amazonLink}}	
+			<Book {title} 
+						{image} 
+						{language}
+						{ebookBundle}
+						{pdfLink}
+						{appleLink}
+						{googleLink}
+						{amazonLink} />
+
+		{/each}
 	{:else}
-		{#each bookData as {title, image, language}}
-			<Book {title} {image} {language} />
-		{/each}	
+		{#each bookData as {title, image, language, ebookBundle, pdfLink, appleLink, googleLink, amazonLink}}
+			<Book {title} 
+						{image} 
+						{language}
+						{ebookBundle}
+						{pdfLink}
+						{appleLink}
+						{googleLink}
+						{amazonLink} />
+		{/each}
 	{/if}
-</main>	
+</main>
 
 
 <style>
@@ -74,7 +89,7 @@
 		box-sizing: border-box;
 	}
 	
-	#search-section {
+	#query-section {
 		width: 100%;
 		display: flex;
 		justify-content: center;
@@ -82,7 +97,6 @@
 		padding: 2% 0;
 	}
 	
-	/* General Structure */
 	main#bookshelf {
 		width: 100%;
 		margin: 10px;
