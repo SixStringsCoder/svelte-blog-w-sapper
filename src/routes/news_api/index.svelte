@@ -4,10 +4,10 @@
 	import NewsPage from './NewsPage.svelte';
 	
 	let cors = "https://cors-anywhere.herokuapp.com/"
-  let url = "http://hn.algolia.com/api/v1/search?tags=front_page";
+  let url = "https://hn.algolia.com/api/v1/search?tags=front_page";
 	
 	let queryTerm = "m1";
-	// let url = `http://hn.algolia.com/api/v1/search?query=${queryTerm}&tags=story`;
+	// let url = `https://hn.algolia.com/api/v1/search?query=${queryTerm}&tags=story`;
 	let dataHits = [];
 	let newsURL;
 	$: console.log(newsURL)
