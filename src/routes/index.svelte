@@ -193,5 +193,8 @@
     <li><a
       aria-current={segment === 'filter_books' ? 'page' : undefined}
       href="filter_books">Filter Books with Menu and Search Input</a></li>
+    <li><a
+      aria-current={segment === 'star_rating' ? 'page' : undefined}
+      href="star_rating">Star rating (adjust with click)</a></li>
   </ul>
 </section>
