@@ -10,20 +10,29 @@
 <!-- Add icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<main>
+	<User />
 
-<User />
+	<div>
+		{#each Array(5) as _, i}
+			<span class="fa fa-star" 
+						class:checked={i+1 <= numStars}
+						data-number={i+1}
+						on:click={giveStars}>
+			</span>
+		{/each}
+	</div>
 
-{#each Array(5) as _, i}
-	<span class="fa fa-star" 
-				class:checked={i+1 <= numStars}
-				data-number={i+1}
-				on:click={giveStars}>
-	</span>
-{/each}
+	<Review />
+</main>
 
-<Review />
 
 <style>
+	main {
+		width: 500px;
+		margin: 20px;
+	}
+
 	span {
 		font-size: 1.2em;
 		cursor: pointer;
