@@ -196,5 +196,8 @@
     <li><a
       aria-current={segment === 'star_rating' ? 'page' : undefined}
       href="star_rating">Star rating (adjust with click)</a></li>
+    <li><a
+      aria-current={segment === 'skills_bar' ? 'page' : undefined}
+      href="skills_bar">Skills bars</a></li>
   </ul>
 </section>
