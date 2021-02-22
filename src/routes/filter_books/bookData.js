@@ -8,15 +8,6 @@ export const bookData = [{
     "google": "https://play.google.com/store/books/details/Kory_Goldberg_Along_the_Path?id=rWhGU_fPycoC",
     "amazon": "https://www.amazon.com/gp/product/1928706568/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=pariyatti-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1928706568&linkId=c0c744876f27f6eeac03fa811ba9a2b6"
 }, {
-    "image": "http://store.pariyatti.org/thumbnail.asp?file=https://store.pariyatti.org/assets/images/776533.jpg&maxx=100&maxy=0",
-    "title": "An Ancient Path",
-    "language": "English",
-    "bundle": "http://store.pariyatti.org/Ancient-Path-An--eBook_p_4596.html",
-    "freepdf": "https://download.pariyatti.org/free/_moIbLs95/An Ancient Path.pdf",
-    "apple": "https://geo.itunes.apple.com/us/book/an-ancient-path/id597142124?mt=11&ign-mpt=uo%3D4",
-    "google": "https://play.google.com/store/books/details/Paul_R_Fleischman_M_D_An_Ancient_Path_Talks_on_Vip?id=ZtmO8UV7ni8C",
-    "amazon": "http://www.amazon.com/gp/product/B00B3M4BUY/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00B3M4BUY&linkCode=as2&tag=pariyatti-20&linkId=CP5UYCAE2NNGJTJF"
-}, {
     "image": "http://store.pariyatti.org/thumbnail.asp?file=https://store.pariyatti.org/assets/images/771430.jpg&maxx=100&maxy=0",
     "title": "Approaching the Dhamma",
     "language": "English",
