@@ -199,5 +199,8 @@
     <li><a
       aria-current={segment === 'skills_bar' ? 'page' : undefined}
       href="skills_bar">Skills bars</a></li>
+    <li><a
+      aria-current={segment === 'scroll_indicator' ? 'page' : undefined}
+      href="scroll_indicator">Scroll Indicator</a></li>
   </ul>
 </section>
