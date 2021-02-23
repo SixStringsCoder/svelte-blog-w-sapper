@@ -1,14 +1,16 @@
-<script>
+<script>	
 	let width;
-	
-	const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  let scrolled = (winScroll / height) * 100;
-	$: console.log(window.pageYOffset)
+
+	const showProgress() {
+		var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+		var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		var scrolled = (winScroll / height) * 100;
+		width = scrolled;
+	}
 	
 </script>
 
-<svelte:window bind:scrollY={width} />
+<svelte:window on:scroll={showProgress} />
 
 <div class="header">
   <h2>Scroll Indicator</h2>
