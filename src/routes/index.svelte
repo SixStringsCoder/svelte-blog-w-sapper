@@ -202,5 +202,8 @@
     <li><a
       aria-current={segment === 'scroll_indicator' ? 'page' : undefined}
       href="scroll_indicator">Scroll Indicator</a></li>
+    <li><a
+      aria-current={segment === 'timeline_holidays' ? 'page' : undefined}
+      href="timeline_holidays">Timeline with search - Holidays</a></li>
   </ul>
 </section>
