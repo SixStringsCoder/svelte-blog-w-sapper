@@ -2,11 +2,14 @@
 	export let name = "New Year's Day"
 	export let date = "Jan. 1, 2017"
   export let left = true;
+	export let eventID;
 </script>
 
 
 	
-<div class="container" class:left class:right={!left}>
+<div class="container" 
+		 class:left class:right={!left}
+		 id={eventID}>
 	<div class="content">
 		<h2>{date}</h2>
 		<h2>{name}</h2>

@@ -1,71 +1,74 @@
 <script>
+	// Based on https://www.w3schools.com/howto/howto_css_timeline.asp
 	import { onMount } from 'svelte';
-
-	import SearchBar from './SearchBar.svelte';
-	import Holiday from './Holiday.svelte';
-	import { key } from './ApiKey.js';
 	
-	let language = "en";
-	let country = "US"
+	import { getData } from './holidaysAPI.js';
+	import { histEvents } from './historyData.js';
+	import Event from './Event.svelte';
+	import SearchForm from './SearchForm.svelte';
 	
-	let searchTerm;
-	$: console.log(searchTerm)
-	
-	/* API to get holiday data */
-	const apiUrl = `https://holidayapi.com/v1/holidays?pretty&key=${key}&country=${country}&year=2020&language=${language}`
-	
-	let holidays = [];
-	$: console.log(holidays)
-
-	 const getData = async () => {	
-		try {
-		 const response = await fetch(apiUrl);
-			if (response.ok) {
-				const jsonResponse = await response.json();
-				return holidays = jsonResponse.holidays
-			}
-			throw new Error('Request Failed');
-		} catch(error) {
-			console.log(`Oops! ${error}!`)
-		};
-	}
+	let events = [];
+	$: console.log(events)
 	
 	const convertDate = (date) => {
 		// Add your time zone to get accurate date
 		let timezone = 'PST'
-		let nd = new Date(`${date} ${timezone}`);
+		let nd = new Date(`${date} ${timezone}`);		
+		console.log(nd);
 
-		let locale = 'en-EN'
-		let year = nd.toLocaleDateString(locale, {year: 'numeric'});
-		let month = nd.toLocaleDateString(locale, {month: 'long'});
-		let day = nd.toLocaleDateString(locale, {day: 'numeric'});
-		
-		return `${month} ${day}, ${year}`
+		// For all parameters: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+		let prettyDate = nd.toLocaleDateString('en-EN', { day: 'numeric', month: 'long', year: 'numeric'});	
+		return prettyDate;
 	}
 	
-	onMount( () => getData());
+	let searchDate;
+	let searchTerm;
+	
+	/* Scroll to Holiday */
+// 	function moveIntoView() {
+// 		document.getElementById(searchTerm).scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+// 	}
+	
+	onMount(async () => events = await getData());
 </script>
 
 
+<header>
+	<SearchForm />
+</header>
+
 <main>
-	<SearchBar bind:searchTerm />
 	<div class="timeline">
-		{#each holidays as {name, date}, i}
-			<Holiday {name} date={convertDate(date)} left={i % 2 === 0} />
+		{#each events as {name, date}, i}
+			<Event {name} 
+							 date={convertDate(date)} 
+							 left={i % 2 === 0}
+							 eventID={name} />
 		{/each}
-	</div>
+	</div>	
 </main>
+
 
 <style>
 	* {
 		box-sizing: border-box;
 	}
+	
+	header {
+		position: fixed;
+		top: 0;
+		background: #f99e58;
+		width: 100%;
+		height: 100px;
+		padding: 5px;
+		z-index: 10;
+	}
 
 	/* Set a background color */
 	main {
-		position: relative;
 		background-color: #474e5d;
 		font-family: Helvetica, sans-serif;
+		margin-top: 90px;
 		overflow: scroll;
 	}
 
@@ -74,8 +77,6 @@
 		position: relative;
 		max-width: 1200px;
 		margin: 0 auto;
-		top: 35px;
-		z-index: 1;
 	}
 
 	/* The actual timeline (the vertical ruler) */
@@ -91,7 +92,6 @@
 	}
 
 	
-
 	/* Media queries - Responsive timeline on screens less than 600px wide */
 	@media screen and (max-width: 600px) {
 	/* Place the timelime to the left */
