@@ -1,29 +1,17 @@
 <script>
-	export let searchDate;
+	// https://www.w3schools.com/howto/howto_css_search_button.asp
 	export let searchTerm;
+	export let searchInput;
 </script>
 
 <div class="form-popup" id="myForm">
   <form class="form-container" on:submit|preventDefault>
-
-		<div>
-			<label for="date"><b>Search by Date </b></label>
-			<input type="number" 
-					 placeholder="Enter event month" 
-					 name="date"
-					 bind:value={searchDate}>
-		</div>
-    
-			
-		<div>
-			<label for="term"><b>Search by Term</b></label>
 			<input type="text" 
 						 placeholder="Enter event name" 
 						 name="term" 
 						 autocomplete="off"
-						 bind:value={searchTerm}>
-		</div>	
-			
+						 bind:value={searchTerm}
+						 bind:this={searchInput}>		
     <button type="submit" class="btn">=&nbsp;&nbsp;Search</button>
   </form>
 </div>
@@ -40,22 +28,21 @@
 		padding: 10px;
 	}
 
-	.form-container div {
-		width: 30%;
-	
-	}
 	
 	/* Full-width input fields */
-	.form-container input[type=text], .form-container input[type=number] {
+	.form-container input[type=text] {
 		width: 100%;
+		height: 45px;
 		padding: 10px;
-		margin: 5px 0;
-		border: none;
+		margin: 9px 0;
+		border-top: 1px solid #777;
+		border-left: 1px solid #777;
+		border-bottom: 1px solid #777;
 		background: #f1f1f1;
 	}
 
 	/* When the inputs get focus, do something */
-	.form-container input[type=text]:focus, .form-container input[type=number]:focus {
+	.form-container input[type=text]:focus {
 		background-color: #ddd;
 		outline: none;
 	}
@@ -65,10 +52,12 @@
 		background-color: #aaa;
 		color: white;
 		font-size: 1.1rem;
-		width: 115px;
+		width: 20%;
 		height: 45px;
 		padding: 5px;
-		border: 1px solid black;
+		border-top: 1px solid #777;
+		border-right: 1px solid #777;
+		border-bottom: 1px solid #777;
 		cursor: pointer;
 		opacity: 1;
 	}

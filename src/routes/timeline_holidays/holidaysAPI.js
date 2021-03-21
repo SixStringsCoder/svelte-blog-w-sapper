@@ -12,7 +12,7 @@ export const getData = async () => {
 		const response = await fetch(apiUrl);
 		if (response.ok) {
 			const jsonResponse = await response.json();
-			console.log(jsonResponse.holidays)
+			// console.log(jsonResponse.holidays)
 			return jsonResponse.holidays
 		}
 		throw new Error('Request Failed');

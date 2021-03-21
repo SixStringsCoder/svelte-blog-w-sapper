@@ -8,42 +8,69 @@
 	import SearchForm from './SearchForm.svelte';
 	
 	let events = [];
-	$: console.log(events)
+	// $: console.log(events)
 	
 	const convertDate = (date) => {
 		// Add your time zone to get accurate date
 		let timezone = 'PST'
 		let nd = new Date(`${date} ${timezone}`);		
-		console.log(nd);
+		// console.log(nd);
 
 		// For all parameters: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
 		let prettyDate = nd.toLocaleDateString('en-EN', { day: 'numeric', month: 'long', year: 'numeric'});	
 		return prettyDate;
 	}
 	
-	let searchDate;
 	let searchTerm;
+	let searchInput;
+	// $: console.log(searchTerm)
+	
+	const getResults = () => {
+		for (let evt of events) {
+			let lowerEvt = evt.name.toLowerCase();
+			if (lowerEvt.includes(searchTerm.toLowerCase())) {
+				console.log(evt.name)
+				setTimeout(() => searchInput.value = "", 2000)
+				return moveIntoView(evt.name)			
+			}
+		}
+		return noResults()
+	}
+	
+	const noResults = () => {
+		searchInput.value = "No Results"
+		setTimeout(() => searchInput.value = "", 2000)
+	}
 	
 	/* Scroll to Holiday */
-// 	function moveIntoView() {
-// 		document.getElementById(searchTerm).scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
-// 	}
+	// https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+	function moveIntoView(result) {
+		document.getElementById(result).scrollIntoView(
+			{
+				behavior: "smooth", 
+			 	block: "center", 
+				inline: "center"
+			}
+		);
+	}
 	
 	onMount(async () => events = await getData());
 </script>
 
 
 <header>
-	<SearchForm />
+	<SearchForm bind:searchTerm 
+							bind:searchInput
+							on:submit={getResults} />
 </header>
 
 <main>
 	<div class="timeline">
 		{#each events as {name, date}, i}
 			<Event {name} 
-							 date={convertDate(date)} 
-							 left={i % 2 === 0}
-							 eventID={name} />
+						 date={convertDate(date)} 
+						 left={i % 2 === 0}
+						 eventID={name} />
 		{/each}
 	</div>	
 </main>
