@@ -10,40 +10,39 @@
 	let events = [];
 	// $: console.log(events)
 	
+	// Convert API date to human readable
 	const convertDate = (date) => {
 		// Add your time zone to get accurate date
 		let timezone = 'PST'
 		let nd = new Date(`${date} ${timezone}`);		
-		// console.log(nd);
-
-		// For all parameters: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
+		
 		let prettyDate = nd.toLocaleDateString('en-EN', { day: 'numeric', month: 'long', year: 'numeric'});	
 		return prettyDate;
 	}
 	
+	
+	/* SEARCH INPUT */
 	let searchTerm;
-	let searchInput;
-	// $: console.log(searchTerm)
 	
 	const getResults = () => {
 		for (let evt of events) {
-			let lowerEvt = evt.name.toLowerCase();
-			if (lowerEvt.includes(searchTerm.toLowerCase())) {
-				console.log(evt.name)
-				setTimeout(() => searchInput.value = "", 2000)
-				return moveIntoView(evt.name)			
+			let lowerName = evt.name.toLowerCase();
+			let lowerDate = convertDate(evt.date).toLowerCase();
+			if (lowerName.includes(searchTerm.toLowerCase()) || 
+				 lowerDate.includes(searchTerm.toLowerCase())) {
+				 setTimeout(() => searchTerm = "", 1500)
+				 return moveIntoView(evt.name)			
 			}
 		}
 		return noResults()
 	}
 	
 	const noResults = () => {
-		searchInput.value = "No Results"
-		setTimeout(() => searchInput.value = "", 2000)
+		searchTerm = "NO RESULTS"
+		setTimeout(() => searchTerm = "", 1500)
 	}
 	
-	/* Scroll to Holiday */
-	// https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+	/* Auto-Scroll to Holiday */
 	function moveIntoView(result) {
 		document.getElementById(result).scrollIntoView(
 			{
@@ -54,13 +53,13 @@
 		);
 	}
 	
+	// Get Holidays API data when App mounts
 	onMount(async () => events = await getData());
 </script>
 
 
 <header>
 	<SearchForm bind:searchTerm 
-							bind:searchInput
 							on:submit={getResults} />
 </header>
 

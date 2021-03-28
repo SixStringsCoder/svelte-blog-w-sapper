@@ -6,7 +6,6 @@
 </script>
 
 
-	
 <div class="container" 
 		 class:left class:right={!left}
 		 id={eventID}>
@@ -16,7 +15,6 @@
 	</div>
 </div>
 	
-
 
 <style>
 	/* Container around content */

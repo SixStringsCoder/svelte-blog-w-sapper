@@ -1,20 +1,20 @@
 <script>
 	// https://www.w3schools.com/howto/howto_css_search_button.asp
 	export let searchTerm;
-	export let searchInput;
 </script>
+
 
 <div class="form-popup" id="myForm">
   <form class="form-container" on:submit|preventDefault>
 			<input type="text" 
-						 placeholder="Enter event name" 
+						 placeholder="Enter event name or month" 
 						 name="term" 
 						 autocomplete="off"
-						 bind:value={searchTerm}
-						 bind:this={searchInput}>		
-    <button type="submit" class="btn">=&nbsp;&nbsp;Search</button>
+						 bind:value={searchTerm}>		
+    <button type="submit" class="btn">🔍&nbsp;&nbsp;Search</button>
   </form>
 </div>
+
 
 <style>
 	* {box-sizing: border-box;}
@@ -23,7 +23,7 @@
 	.form-container {
 		display: flex;
 		justify-content: space-around;
-		align-items: flex-end;
+		align-items: center;
 		width: 100%;
 		padding: 10px;
 	}
