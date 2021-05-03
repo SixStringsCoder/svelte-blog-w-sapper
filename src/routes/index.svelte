@@ -205,5 +205,8 @@
     <li><a
       aria-current={segment === 'timeline_holidays' ? 'page' : undefined}
       href="timeline_holidays">Timeline with search - Holidays</a></li>
+    <li><a
+      aria-current={segment === 'calendar_scheduler' ? 'page' : undefined}
+      href="calendar_scheduler">calendar with scheduler</a></li>
   </ul>
 </section>
