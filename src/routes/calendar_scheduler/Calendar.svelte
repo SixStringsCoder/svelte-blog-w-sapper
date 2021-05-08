@@ -1,81 +1,81 @@
 <script>
-const date = new Date();
-
-const today = {
-	day: date.getDate(),
-	month: date.getMonth(),
-	year: date.getFullYear(),
-}
-
-let currentYear = date.getFullYear();
-const monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
-let currentMonthIndex = date.getMonth();
-// let currentMonth = date.toLocaleString('en-US', { month: 'long' });	
-$: currentMonth = monthNames[currentMonthIndex];		
-const currentDay = date.getDate();
+	const date = new Date();
 	
-$: firstDayIndex = new Date(currentYear, currentMonthIndex, 1).getDay(); // Sunday is 0
-$: numberOfDays = new Date(currentYear, currentMonthIndex+1, 0).getDate();
-	
-	
-const goToNextMonth = () => {
-	if (currentMonthIndex === 11) {
-		currentYear += 1;
-		return currentMonthIndex = 0;
+	const today = {
+		dayNumber: date.getDate(),
+		month: date.getMonth(),
+		year: date.getFullYear(),
 	}
-	return currentMonthIndex += 1;
-}
-
-const goToPrevMonth = () => {
-	if (currentMonthIndex === 0) {
-		currentYear -= 1;
-		return currentMonthIndex = 11;
+	
+	const monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	let monthIndex = date.getMonth();
+	// const currentMonth = date.toLocaleString('en-US', { month: 'long' })
+	$: month = monthNames[monthIndex];
+	
+	let year = date.getFullYear();
+	
+	$: firstDayIndex = new Date(year, monthIndex, 1).getDay();
+	// const currentDay = date.getDate();
+	$: numberOfDays = new Date(year, monthIndex+1, 0).getDate();
+	
+	$: calendarCellsQty = firstDayIndex <= 4 ? 35 : 42;	
+	
+	const goToNextMonth = () => {
+		if (monthIndex >= 11) {
+			year += 1;
+			return monthIndex = 0;
+		}
+		return monthIndex += 1;
 	}
-	return currentMonthIndex -= 1;
-}
-
-
-const calendarCellsQty = firstDayIndex <= 4 ? 35 : 42;
 	
-$: console.log(`${currentMonth} ${currentDay}, ${currentYear}, No. of days: ${numberOfDays}, first day: ${firstDayIndex}`);
+	const goToPrevMonth = () => {
+		if (monthIndex <= 0) {
+			year -= 1;
+			return monthIndex = 11;
+		}
+		return monthIndex -= 1;
+	}
 	
+	$: console.log(`${month}, ${today.dayNumber}, ${year}, FIRST DAY index is ${firstDayIndex}, MONTH index is ${monthIndex}, No. of days: ${numberOfDays}`)
 </script>
 
 
-<div class="month">
-	<ul>
-		<li class="prev" on:click={goToPrevMonth}>&#10094;</li>
-		<li class="next" on:click={goToNextMonth}>&#10095;</li>
-		<li>{currentMonth}<br>
-				<span style="font-size:18px">{currentYear}</span>
-		</li>
-	</ul>
-</div>
-
-<ul class="weekdays">
-	<li>Su</li>
-	<li>Mo</li>
-	<li>Tu</li>
-	<li>We</li>
-	<li>Th</li>
-	<li>Fr</li>
-	<li>Sa</li>
-</ul>
-
-<ul class="days">
-	{#each Array(calendarCellsQty) as _, i}
-		{#if i < firstDayIndex || i >= firstDayIndex+numberOfDays}
-			<li data-index={(i-firstDayIndex)+1}>&nbsp;</li>
-		{:else}
-			<li class:active={currentYear === today.year && currentMonthIndex === today.month && i === currentDay+(firstDayIndex-1)}
-					data-index={(i-firstDayIndex)+1}>
-				{(i-firstDayIndex)+1}
+	<div class="month">
+		<ul>
+			<li class="prev" on:click={goToPrevMonth}>&#10094;</li>
+			<li class="next" on:click={goToNextMonth}>&#10095;</li>
+			<li>{month}<br>
+				<span style="font-size:18px">{year}</span>
 			</li>
-		{/if}
-	{/each}
-</ul>
+		</ul>
+	</div>
+
+	<ul class="weekdays">
+		<li>Su</li>
+		<li>Mo</li>
+		<li>Tu</li>
+		<li>We</li>
+		<li>Th</li>
+		<li>Fr</li>
+		<li>Sa</li>
+	</ul>
+
+	<ul class="days">
+		{#each Array(calendarCellsQty) as _, i}
+			{#if i < firstDayIndex || i >= numberOfDays+firstDayIndex  }
+				<li>&nbsp;</li>
+			{:else}
+				<li class:active={i === today.dayNumber+(firstDayIndex-1) &&
+													monthIndex === today.month &&
+													year === today.year}>
+					{(i - firstDayIndex) + 1}
+				</li>
+			{/if}
+		{/each}
+	</ul>
 
 
+				
 <style>
 	ul {list-style-type: none;}
 
