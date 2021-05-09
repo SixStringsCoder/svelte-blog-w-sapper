@@ -67,7 +67,9 @@
 			{:else}
 				<li class:active={i === today.dayNumber+(firstDayIndex-1) &&
 													monthIndex === today.month &&
-													year === today.year}>
+													year === today.year}
+						data-dateID={`${month}_${(i-firstDayIndex)+1}_${year}`}
+						on:click >
 					{(i - firstDayIndex) + 1}
 				</li>
 			{/if}
@@ -140,7 +142,7 @@
 		display: inline-block;
 		border: 1px solid black;
 		padding: 9px;
-		width: 11.6%;
+		width: 12.6%;
 		text-align: center;
 		margin-bottom: 1px;
 		font-size: 1.2rem;
