@@ -2,20 +2,23 @@
 	import { fade, fly } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 	
+	import Appointment from './Appointment.svelte';
+	
 	const dispatch = createEventDispatcher();
 	
-	export let dateID = "May_8_2021";
+	export let dateID;
 	export let schedDate = "May 8, 2021";
 </script>
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 
-<section>
+<section transition:fade={{ duration: 125 }}>
 	<form method="post"
-				id={dateID}
-				in:fly={{ y: -300 }} out:fade={{ duration: 100 }}>
-		<div>
+				id={dateID}>
+		
+		<div id="closer-cont">
 			<span on:click={() => dispatch('modalClose')} 
 						class="close" 
 						title="Close Modal">
@@ -23,41 +26,58 @@
 			</span>
 		</div>
 
-		<div id="myDIV" class="header">
-			<h2>Schedule</h2>
+		<header>
+			<h2>My Schedule for</h2>
 			<h2>{schedDate}</h2>
-			<input type="text" id="event-input" placeholder="Add an event...">
-			<input type="text" id="time-input" placeholder="Begins at...">
-			<span on:click={() => dispatch('addEvent')} class="addBtn">Add</span>
-		</div>
+			<input type="text" 
+						 id="event-input" 
+						 placeholder="Add an event...">
+			<div id="time-cont">
+				<div id="hrs-mins-cont">
+					<input type="number" 
+								 id="time-input" 
+								 name="time" 
+								 min="1" 
+								 max="12"
+								 step="1"
+								 placeholder="Hr.">
+					<span id="time-colon">:</span>
+					<input type="number" 
+							 id="time-input" 
+							 name="time" 
+							 min="00" 
+							 max="59"
+							 step="1"
+							 placeholder="00">
+				</div>	
+
+				<div id="am-pm-cont">
+					<div>
+						<input type="radio" id="amPMChoice1"
+								 name="contact" value="am">
+						<label for="contactChoice1">AM</label>
+					</div>
+					
+					<div>
+						<input type="radio" id="amPMChoice2"
+								 name="contact" value="pm">
+						<label for="contactChoice2">PM</label>
+					</div>		
+				</div>
+				
+			</div>
+			
+			<div>
+			<button on:click={() => dispatch('addEvent')} 			
+							class="addBtn">
+				Add</button>
+			</div>	
+		</header>
 	</form>
 
-	<table id="myUL">
-		<tr>
-			<th>Event</th>
-			<th>Time</th>
-			<th>Complete</th>
-		</tr>
-		
-		<tr class="completed">
-			<td><i class="fa fa-trash-o fa-2x"></i></td>
-			<td>Hit the gym</td>
-			<td>9:00 am</td>
-			<td><input type="checkbox" checked /></td>
-		</tr>
-		<tr>
-			<td><i class="fa fa-trash-o fa-2x"></i></td>
-			<td>Pay bills</td>
-			<td>12:00 pm</td>
-			<td><input type="checkbox" /></td>
-		</tr>
-		<tr>
-			<td><i class="fa fa-trash-o fa-2x"></i></td>
-			<td>Organize office</td>
-			<td>2:00 pm</td>
-			<td><input type="checkbox" /></td>
-		</tr>
-	</table>
+		<table id="appts-cont">
+			<Appointment />
+		</table>
 </section>
 
 
@@ -65,24 +85,28 @@
 	section { 
 		box-sizing: border-box;
 		width: 100%;
+		height: 100vh;
 		position: absolute;
 		left: 0;
 		top: 0;
+		background-color: white;
+	}
+	
+	h2 {
+		margin: 5px 0;
 	}
 	
 	/* Bordered form */
 	form {
-/* 		width: 80%;
-		height: 80%; */
-
 		top: 0; left: 0; bottom: 0; right: 0;
 		z-index: 10;
 		overflow: auto;
 		margin: auto;
 		background-color: white;
 		box-shadow: 0 0 10px black;
+		
 	}
-	
+		
 	table {
 		border-collapse: collapse;
 		border-spacing: 0;
@@ -91,14 +115,7 @@
 		background-color: white;
 	}
 
-	th, td {
-		text-align: left;
-		padding: 16px;
-	}
-
-	tr:nth-child(even) {
-		background-color: #f2f2f2;
-	}	
+	
 	
 	/* Style the close button */
 	.close {
@@ -117,7 +134,7 @@
 	}
 
 	/* Style the header */
-	.header {
+	header {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -126,29 +143,59 @@
 		color: white;
 	/*   text-align: center; */
 	}
-
-	/* Clear floats after the header */
-	.header:after {
-		content: "";
-		display: table;
-		clear: both;
+	
+	#time-cont {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		margin-bottom: 10px;
 	}
-
+	
+	#hrs-mins-cont {
+		width: 200px;
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	#time-colon {
+		font-size: 3rem;
+	}
+	
+	input[type=number] {
+		margin-right: 5px;
+	}
+	
+	input[type=number]::-webkit-inner-spin-button {
+    opacity: 1
+	}
+	
+	#am-pm-cont > div {
+		width: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	input[type="radio"] {
+		width: 20px;
+	}
+	
 	/* Style the input */
 	input {
 		margin: 10px 0;
 		border: none;
 		border-radius: 0;
-		width: 50%;
+		width: 300px;
 		padding: 10px;
 		float: left;
-		font-size: 16px;
+		font-size: 1.1rem;
 	}
 
 	/* Style the "Add" button */
+	
 	.addBtn {
 		padding: 10px;
-		width: 25%;
+		width: 160%;
 		background:	hsl(168, 76%, 40%);
 		color: #FFF;
 		float: left;
@@ -170,20 +217,7 @@
 		color: hsl(168, 76%, 25%);
 	}	
 
-	input[type="checkbox"] {
-		width: 55px;
-		height: 25px;
-	}
-
-	input[type=checkbox]:checked {
-		background-color: hsl(168, 76%, 100%);
-		color: white;
-	}
-
-	.completed {
-		text-decoration: line-through;
-		color: #aaa;
-	}	
+	
 
 	/* Change styles for span and cancel button on extra small screens */
 	@media screen and (max-width: 300px) {
