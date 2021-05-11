@@ -8,6 +8,13 @@
 	
 	export let dateID;
 	export let schedDate = "May 8, 2021";
+	
+	let eventName;
+	let hour;
+	let minutes;
+	let amOrPM = "pm";
+	$: time = `${hour}:${minutes < 10 ? '0'+minutes : minutes}${amOrPM}`;
+	$: console.log(`${eventName} at ${time}`)
 </script>
 
 
@@ -31,7 +38,9 @@
 			<h2>{schedDate}</h2>
 			<input type="text" 
 						 id="event-input" 
-						 placeholder="Add an event...">
+						 required
+						 placeholder="Add an event..."
+						 bind:value={eventName}>
 			<div id="time-cont">
 				<div id="hrs-mins-cont">
 					<input type="number" 
@@ -40,27 +49,35 @@
 								 min="1" 
 								 max="12"
 								 step="1"
-								 placeholder="Hr.">
+								 placeholder="Hr."
+								 bind:value={hour}>
 					<span id="time-colon">:</span>
 					<input type="number" 
 							 id="time-input" 
 							 name="time" 
-							 min="00" 
+							 min="0" 
 							 max="59"
 							 step="1"
-							 placeholder="00">
+							 placeholder="Mins."
+							 bind:value={minutes}>
 				</div>	
 
 				<div id="am-pm-cont">
 					<div>
-						<input type="radio" id="amPMChoice1"
-								 name="contact" value="am">
+						<input type="radio" 
+									 id="amPMChoice1"
+								 	 name="contact" 
+									 bind:group={amOrPM}
+									 value="am">
 						<label for="contactChoice1">AM</label>
 					</div>
 					
 					<div>
-						<input type="radio" id="amPMChoice2"
-								 name="contact" value="pm">
+						<input type="radio" 
+									 id="amPMChoice2"
+								 	 name="contact" 
+									 bind:group={amOrPM}
+									 value="pm">
 						<label for="contactChoice2">PM</label>
 					</div>		
 				</div>
@@ -76,7 +93,7 @@
 	</form>
 
 		<table id="appts-cont">
-			<Appointment />
+			<Appointment {eventName} {time} />
 		</table>
 </section>
 

@@ -1,13 +1,13 @@
 <script>
-
 	export let apptName = "Hit the gym";
+	export let time = "9:00 am";
 </script>
 
 
 <tr class="completed">
 	<td><input type="checkbox" checked /></td>
 	<td>{apptName}</td>
-	<td>9:00 am</td>
+	<td>{time}</td>
 	<td><i class="fa fa-trash-o fa-2x"></i></td>	
 </tr>
 
