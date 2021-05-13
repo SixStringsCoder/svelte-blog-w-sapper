@@ -36,7 +36,7 @@
 		return monthIndex -= 1;
 	}
 	
-	$: console.log(`${month}, ${today.dayNumber}, ${year}, FIRST DAY index is ${firstDayIndex}, MONTH index is ${monthIndex}, No. of days: ${numberOfDays}`)
+// 	$: console.log(`${month}, ${today.dayNumber}, ${year}, FIRST DAY index is ${firstDayIndex}, MONTH index is ${monthIndex}, No. of days: ${numberOfDays}`)
 </script>
 
 
@@ -69,7 +69,7 @@
 													monthIndex === today.month &&
 													year === today.year}
 						data-dateID={`${month}_${(i-firstDayIndex)+1}_${year}`}
-						on:click >
+						on:click>
 					{(i - firstDayIndex) + 1}
 				</li>
 			{/if}
@@ -142,7 +142,7 @@
 		display: inline-block;
 		border: 1px solid black;
 		padding: 9px;
-		width: 12.6%;
+		width: 11.6%;
 		text-align: center;
 		margin-bottom: 1px;
 		font-size: 1.2rem;

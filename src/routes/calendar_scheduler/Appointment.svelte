@@ -1,11 +1,12 @@
 <script>
-	export let apptName = "Hit the gym";
-	export let time = "9:00 am";
+	export let apptName;
+	export let time;
+	export let completed;
 </script>
 
 
-<tr class="completed">
-	<td><input type="checkbox" checked /></td>
+<tr class:completed>
+	<td><input type="checkbox" bind:checked={completed} /></td>
 	<td>{apptName}</td>
 	<td>{time}</td>
 	<td><i class="fa fa-trash-o fa-2x"></i></td>	

@@ -8,13 +8,30 @@
 	
 	export let dateID;
 	export let schedDate = "May 8, 2021";
+	export let appointments = [];
 	
-	let eventName;
-	let hour;
-	let minutes;
-	let amOrPM = "pm";
-	$: time = `${hour}:${minutes < 10 ? '0'+minutes : minutes}${amOrPM}`;
-	$: console.log(`${eventName} at ${time}`)
+	let apptDetails = {
+		eventName: "",
+		hour: "",
+		minutes: "",
+		amOrPM: "",
+		completed: false
+	}
+
+	$: time = `${apptDetails.hour}:${apptDetails.minutes < 10 ? '0'+apptDetails.minutes : apptDetails.minutes}${apptDetails.amOrPM}`;
+	
+	const submitAppt = () => {
+		dispatch('addAppt', apptDetails);
+		apptDetails = {
+			eventName: "",
+			hour: "",
+			minutes: "",
+			amOrPM: "",
+			completed: false
+		}
+	}
+		
+	// $: console.log(`${apptDetails.eventName} at ${time} - ${schedDate}`)
 </script>
 
 
@@ -23,7 +40,8 @@
 
 <section transition:fade={{ duration: 125 }}>
 	<form method="post"
-				id={dateID}>
+				id={dateID}
+				on:submit|preventDefault={submitAppt}>
 		
 		<div id="closer-cont">
 			<span on:click={() => dispatch('modalClose')} 
@@ -40,7 +58,7 @@
 						 id="event-input" 
 						 required
 						 placeholder="Add an event..."
-						 bind:value={eventName}>
+						 bind:value={apptDetails.eventName}>
 			<div id="time-cont">
 				<div id="hrs-mins-cont">
 					<input type="number" 
@@ -50,7 +68,7 @@
 								 max="12"
 								 step="1"
 								 placeholder="Hr."
-								 bind:value={hour}>
+								 bind:value={apptDetails.hour}>
 					<span id="time-colon">:</span>
 					<input type="number" 
 							 id="time-input" 
@@ -59,7 +77,7 @@
 							 max="59"
 							 step="1"
 							 placeholder="Mins."
-							 bind:value={minutes}>
+							 bind:value={apptDetails.minutes}>
 				</div>	
 
 				<div id="am-pm-cont">
@@ -67,7 +85,7 @@
 						<input type="radio" 
 									 id="amPMChoice1"
 								 	 name="contact" 
-									 bind:group={amOrPM}
+									 bind:group={apptDetails.amOrPM}
 									 value="am">
 						<label for="contactChoice1">AM</label>
 					</div>
@@ -76,7 +94,7 @@
 						<input type="radio" 
 									 id="amPMChoice2"
 								 	 name="contact" 
-									 bind:group={amOrPM}
+									 bind:group={apptDetails.amOrPM}
 									 value="pm">
 						<label for="contactChoice2">PM</label>
 					</div>		
@@ -85,15 +103,18 @@
 			</div>
 			
 			<div>
-			<button on:click={() => dispatch('addEvent')} 			
-							class="addBtn">
+			<button class="addBtn">
 				Add</button>
 			</div>	
 		</header>
 	</form>
 
 		<table id="appts-cont">
-			<Appointment {eventName} {time} />
+			{#each appointments as appt}
+				<Appointment apptName={appt.eventname} 
+										 time={appt.time}
+										 completed={appt.completed} />
+			{/each}
 		</table>
 </section>
 
