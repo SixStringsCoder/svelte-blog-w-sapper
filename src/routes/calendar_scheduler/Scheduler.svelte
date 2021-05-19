@@ -30,7 +30,8 @@
 			completed: false
 		}
 	}
-		
+	
+
 	// $: console.log(`${apptDetails.eventName} at ${time} - ${schedDate}`)
 </script>
 
@@ -59,7 +60,9 @@
 						 required
 						 placeholder="Add an event..."
 						 bind:value={apptDetails.eventName}>
+			
 			<div id="time-cont">
+				
 				<div id="hrs-mins-cont">
 					<input type="number" 
 								 id="time-input" 
@@ -100,21 +103,27 @@
 					</div>		
 				</div>
 				
-			</div>
+			</div> <!-- end of .time-cont -->
 			
 			<div>
-			<button class="addBtn">
-				Add</button>
+				<button class="addBtn">Add</button>
 			</div>	
 		</header>
 	</form>
 
 		<table id="appts-cont">
-			{#each appointments as appt}
-				<Appointment apptName={appt.eventname} 
-										 time={appt.time}
-										 completed={appt.completed} />
-			{/each}
+			{#if appointments.length === 0}
+				<h1>No appointments scheduled</h1>
+			{:else}
+				{#each appointments as appt}
+					<Appointment {dateID}
+											 apptID={appt.id}
+											 apptName={appt.eventname} 
+											 time={appt.time}
+											 completed={appt.completed}
+											 />
+				{/each}
+			{/if}
 		</table>
 </section>
 
@@ -128,6 +137,11 @@
 		left: 0;
 		top: 0;
 		background-color: white;
+	}
+	
+	h1 {
+		text-align: center;
+		color: gray;
 	}
 	
 	h2 {
