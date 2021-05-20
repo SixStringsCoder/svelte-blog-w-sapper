@@ -1,5 +1,4 @@
 <script>
-	import { tick } from 'svelte'
 	import scheduleStore from './schedule-store.js';
 	
 	export let apptName;
@@ -8,6 +7,8 @@
   export let dateID;
 	export let apptID;
 	let apptRow;
+	let apptEvtName;
+	let apptEvtTime;
 	
 	const removeAppt = () => {		
 		scheduleStore.update(currState => {		
@@ -15,16 +16,45 @@
 			return currState;	
 		});
 	}
+	
+	const editApptName = (e) => {
+		let newApptName = e.target.textContent;
+		scheduleStore.update(currState => {
+			let i = currState[dateID].findIndex(appt => appt.id == apptID)
+			currState[dateID][i].eventname = newApptName;
+			return currState;
+		})
+	}
+	
+	const editApptTime = (e) => {
+		let newApptTime = e.target.textContent;
+		scheduleStore.update(currState => {
+			let i = currState[dateID].findIndex(appt => appt.id == apptID)
+			currState[dateID][i].time = newApptTime;
+			return currState;
+		})
+	}
+	
+	
 </script>
 
 
 <tr class:completed
-		data-dateID
-		data-apptID
+		data-dateID={dateID}
+		data-apptID={apptID}
 		bind:this={apptRow}>
-	<td><input type="checkbox" bind:checked={completed} /></td>
-	<td>{apptName}</td>
-	<td>{time}</td>
+
+	<td><input type="checkbox" 
+						 bind:checked={completed} />
+	</td>
+	<td contenteditable
+			bind:this={apptEvtName}
+			on:blur={editApptName}>{apptName}
+	</td>
+	<td contenteditable
+			bind:this={apptEvtTime}
+			on:blur={editApptTime}>{time}
+	</td>
 	<td>
 		<i class="fa fa-trash-o fa-2x"
 			 on:click={removeAppt}></i>
@@ -36,9 +66,14 @@
 
 	td {
 		text-align: left;
-		padding: 6px;
+		padding: 6px;		
 	}
-
+	
+	td,
+	input {
+		cursor: pointer
+	}
+	
 	tr:nth-child(even) {
 		background-color: #f2f2f2;
 	}
@@ -58,11 +93,13 @@
 		color: #aaa;
 	}	
 	
+/* 	.fa-pencil,
 	.fa-trash-o {
 		cursor: pointer;
 	}
+	.fa-pencil:active,
 	.fa-trash-o:active {
 		cursor: pointer;
-		color: red;
-	}
+		color: #F2480A;
+	} */
 </style>

@@ -22,6 +22,7 @@
 	
 	const submitAppt = () => {
 		dispatch('addAppt', apptDetails);
+		// Return to empty values
 		apptDetails = {
 			eventName: "",
 			hour: "",
@@ -31,7 +32,6 @@
 		}
 	}
 	
-
 	// $: console.log(`${apptDetails.eventName} at ${time} - ${schedDate}`)
 </script>
 
