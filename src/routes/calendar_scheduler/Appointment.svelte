@@ -6,9 +6,9 @@
 	export let completed;
   export let dateID;
 	export let apptID;
-	let apptRow;
-	let apptEvtName;
-	let apptEvtTime;
+	let trAppt;
+	let tdApptName;
+	let tdApptTime;
 	
 	const removeAppt = () => {		
 		scheduleStore.update(currState => {		
@@ -42,17 +42,17 @@
 <tr class:completed
 		data-dateID={dateID}
 		data-apptID={apptID}
-		bind:this={apptRow}>
+		bind:this={trAppt}>
 
 	<td><input type="checkbox" 
 						 bind:checked={completed} />
 	</td>
 	<td contenteditable
-			bind:this={apptEvtName}
+			bind:this={tdApptName}
 			on:blur={editApptName}>{apptName}
 	</td>
 	<td contenteditable
-			bind:this={apptEvtTime}
+			bind:this={tdApptTime}
 			on:blur={editApptTime}>{time}
 	</td>
 	<td>
