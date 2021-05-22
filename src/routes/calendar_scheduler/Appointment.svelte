@@ -34,6 +34,15 @@
 			return currState;
 		})
 	}
+
+	const editApptComp = (e) => {
+		let isCompleted = e.target.checked;
+		scheduleStore.update(currState => {
+			let i = currState[dateID].findIndex(appt => appt.id == apptID)
+			currState[dateID][i].completed = isCompleted;
+			return currState;
+		})
+	}
 	
 	
 </script>
@@ -45,7 +54,8 @@
 		bind:this={trAppt}>
 
 	<td><input type="checkbox" 
-						 bind:checked={completed} />
+						 bind:checked={completed}
+						 on:change={editApptComp} />
 	</td>
 	<td contenteditable
 			bind:this={tdApptName}
