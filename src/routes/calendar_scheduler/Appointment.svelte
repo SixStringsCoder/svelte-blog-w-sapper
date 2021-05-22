@@ -1,5 +1,5 @@
 <script>
-	import scheduleStore from './schedule-store.js';
+	import { scheduleStore } from './stores/schedule-store';
 	
 	export let apptName;
 	export let time;

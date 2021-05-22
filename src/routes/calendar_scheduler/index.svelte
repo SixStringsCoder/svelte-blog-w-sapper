@@ -1,13 +1,13 @@
 <script>
 	import { onDestroy } from 'svelte';
-	import scheduleStore from './schedule-store.js';
+	import { scheduleStore } from './stores/schedule-store';
 	import Calendar from './Calendar.svelte';
 	import Scheduler from './Scheduler.svelte';
 	
 	let schedule = {};
-	const unsubscribe = scheduleStore.subscribe(currState => {
-		schedule = currState;
-		// localStorage.setItem("storedSchedule", schedule)
+	
+	const unsubscribe = scheduleStore.subscribe(currDataState => {
+		schedule = currDataState;
 	});
 	
 	onDestroy(() => {
@@ -27,30 +27,19 @@
 	}
 	
 	const handleScheduler = (e) => {
-		schedulerShowing = !schedulerShowing;
+		schedulerShowing = true;
 		dateID = e.target.dataset.dateid;
 		makeDateSchedHeading();
-		if (schedule[dateID].length === 0) {
-			scheduleStore.update(currState => { 
-				delete currState[dateID] 
-				return currState 
-			})
-		}
 	}
-
+	
 	const closeScheduler = () => {
-		schedulerShowing = !schedulerShowing;
-		removeDateIDFromSched();
-	}
-
-	const removeDateIDFromSched = () => {
-		if (schedule[dateID].length === 0) {
-			scheduleStore.update(currState => { 
-				delete currState[dateID] 
-				return currState 
+		schedulerShowing = false;
+		if (schedule[dateID] && schedule[dateID].length === 0) {
+			scheduleStore.update(currDataState => { 
+				delete currDataState[dateID] 
+				return currDataState 
 			})
 		}
-		return;
 	}
 	
 	const setApptToSch = (e) => {
@@ -65,15 +54,15 @@
 		};
 		
 		if (!schedule[dateID]) {
-			scheduleStore.update(currState => { 
-				currState[dateID] = [newAppt]; 
-				return currState 
+			scheduleStore.update(currDataState => { 
+				currDataState[dateID] = [newAppt]; 
+				return currDataState 
 			})
 		} else {
-			scheduleStore.update(currState => {
-				let currDayAppts = currState[dateID];
-				currState[dateID] = [...currDayAppts, newAppt];
-				return currState 
+			scheduleStore.update(currDataState => {
+				let currDayAppts = currDataState[dateID];
+				currDataState[dateID] = [...currDayAppts, newAppt];
+				return currDataState 
 			})
 		}
 		
