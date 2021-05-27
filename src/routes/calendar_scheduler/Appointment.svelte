@@ -1,79 +1,51 @@
 <script>
-	import { scheduleStore } from './stores/schedule-store';
+	import scheduleStore from './schedule-store';
 	
-	export let apptName;
-	export let time;
-	export let completed;
-  export let dateID;
+	export let apptName, time, completed;
 	export let apptID;
-	let trAppt;
-	let tdApptName;
-	let tdApptTime;
+	export let dateID;
 	
-	const removeAppt = () => {		
-		scheduleStore.update(currState => {		
-			currState[dateID] = currState[dateID].filter(appt => appt.id !== apptID);	
-			return currState;	
-		});
-	}
-	
-	const editApptName = (e) => {
-		let newApptName = e.target.textContent;
-		scheduleStore.update(currState => {
-			let i = currState[dateID].findIndex(appt => appt.id == apptID)
-			currState[dateID][i].eventname = newApptName;
-			return currState;
+	const deleteAppt = () => {
+		scheduleStore.update(currDataState => {
+			currDataState[dateID] = currDataState[dateID].filter(appt => {
+				return appt.id !== apptID;
+			})
+			return currDataState;
 		})
 	}
 	
-	const editApptTime = (e) => {
-		let newApptTime = e.target.textContent;
+	const updateAppt = (e, key) => {
+		let newValue;
+		e.target.nodeName === "TD" ? newValue = e.target.textContent
+			: newValue = e.target.checked
+		
 		scheduleStore.update(currState => {
 			let i = currState[dateID].findIndex(appt => appt.id == apptID)
-			currState[dateID][i].time = newApptTime;
+			currState[dateID][i][key] = newValue;
 			return currState;
 		})
 	}
-
-	const editApptComp = (e) => {
-		let isCompleted = e.target.checked;
-		scheduleStore.update(currState => {
-			let i = currState[dateID].findIndex(appt => appt.id == apptID)
-			currState[dateID][i].completed = isCompleted;
-			return currState;
-		})
-	}
-	
-	
 </script>
 
-
-<tr class:completed
-		data-dateID={dateID}
-		data-apptID={apptID}
-		bind:this={trAppt}>
-
-	<td><input type="checkbox" 
-						 bind:checked={completed}
-						 on:change={editApptComp} />
+<tr class:completed>
+	<td>
+		<input type="checkbox" 				 
+					 bind:checked={completed}
+					 on:change={(e) => updateAppt(e, "completed")} />
 	</td>
+	
 	<td contenteditable
-			bind:this={tdApptName}
-			on:blur={editApptName}>{apptName}
-	</td>
+			on:blur={(e) => updateAppt(e, "eventname")}>{apptName}</td>
 	<td contenteditable
-			bind:this={tdApptTime}
-			on:blur={editApptTime}>{time}
-	</td>
+			on:blur={(e) => updateAppt(e, "time")}>{time}</td>
+	
 	<td>
 		<i class="fa fa-trash-o fa-2x"
-			 on:click={removeAppt}></i>
+			 on:click={deleteAppt}></i>
 	</td>	
 </tr>
 
-
 <style>
-
 	td {
 		text-align: left;
 		padding: 6px;		
@@ -91,6 +63,7 @@
 	input[type="checkbox"] {
 		width: 55px;
 		height: 25px;
+		margin-top: 10px;
 	}
 
 	input[type=checkbox]:checked {
@@ -102,14 +75,4 @@
 		text-decoration: line-through;
 		color: #aaa;
 	}	
-	
-/* 	.fa-pencil,
-	.fa-trash-o {
-		cursor: pointer;
-	}
-	.fa-pencil:active,
-	.fa-trash-o:active {
-		cursor: pointer;
-		color: #F2480A;
-	} */
 </style>
